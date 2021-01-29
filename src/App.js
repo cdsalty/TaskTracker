@@ -7,19 +7,19 @@ const App = () => {
     {
       id: 1,
       text: "Doctors Appointment",
-      day: "Feb 4th at 12:00pm",
+      day: "Feb. 4th @ 12:00pm",
       reminder: "true"
     },
     {
       id: 2,
       text: "Ellie's Dance Lessons",
-      day: "Feb 6th at 4:00pm",
+      day: "Feb. 6th @ 4:00pm",
       reminder: "true"
     },
     {
       id: 3,
       text: "Yard Clean-up",
-      day: "Feb 3rd at 10:00am",
+      day: "Feb. 3rd @ 10:00am",
       reminder: "false"
     }
   ]);
