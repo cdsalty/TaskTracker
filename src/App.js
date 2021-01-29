@@ -24,18 +24,50 @@ const App = () => {
     }
   ]);
 
+  // Toggle Task Reminder: Allow user the ability to double click to create/set a reminder and put a border around it that identifies it as a "reminder"
+  const taskReminder = id => {
+    console.log(id);
+    // setTasks(
+    //   tasks.map(task => {
+    //     task.id === id ? { ...task, reminder: !task.reminder } : task;
+    //   })
+    // );
+  };
+
   // Delete Task
   const deleteTask = id => {
-    // What should be shown when a task is deleted? Only the task id's that aren't equal to the id; Not the task.id that matches the id that matches because it should be deleted.
     setTasks(tasks.filter(task => task.id !== id));
   };
 
   return (
     <div className="container">
       <Header />
-      <Tasks tasks={tasks} onDelete={deleteTask} />
+      {/* What to show... */}
+      {tasks.length > 0 ? (
+        <Tasks tasks={tasks} onDelete={deleteTask} onToggle={taskReminder} />
+      ) : (
+        "You have no task as this moment"
+      )}
     </div>
   );
 };
 
 export default App;
+
+/*
+// Delete Task
+  const deleteTask = id => {
+    // What should be shown when a task is deleted?
+    // set the tasks so it only shows the task ids' that don't match the id;
+    // The goal is to remove the task.id that matches the id so it gets deleted from the list of tasks.
+    setTasks(tasks.filter(task => task.id !== id));
+  };
+
+
+for the taskReminder...  
+- will need to take in the "id" in order to know which reminder to set
+- pass down, inside Task.... 
+- in tasks, pass in onToggle, and then assign it 
+
+
+*/

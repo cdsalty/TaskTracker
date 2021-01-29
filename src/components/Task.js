@@ -1,8 +1,8 @@
 import { FaTimes } from "react-icons/fa";
 
-const Task = ({ task, onDelete }) => {
+const Task = ({ task, onDelete, onToggle }) => {
   return (
-    <div className="task">
+    <div className="task" onDoubleClick={id => onToggle(task.id)}>
       <h3>
         {task.text}{" "}
         <FaTimes
@@ -16,3 +16,13 @@ const Task = ({ task, onDelete }) => {
 };
 
 export default Task;
+
+/*
+
+  <div className="task" onDoubleClick = {taskReminder}>   NOT ABLE TO PASS IT LIKE THIS BECAUSE I NEED TO KNOW WHICH ONE TO ASSOCIATE THE DOUBLECLICK WITH THE REMINDER
+  
+      i n s t e a d 
+
+  <div className="task" onDoubleClick={() => taskReminder(task.id)}>
+
+*/
