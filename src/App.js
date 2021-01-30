@@ -26,12 +26,13 @@ const App = () => {
 
   // Toggle Task Reminder: Allow user the ability to double click to create/set a reminder and put a border around it that identifies it as a "reminder"
   const taskReminder = id => {
-    console.log(id);
-    // setTasks(
-    //   tasks.map(task => {
-    //     task.id === id ? { ...task, reminder: !task.reminder } : task;
-    //   })
-    // );
+    // console.log(id);
+    // if task.id matches the id double clicked, spread all the task and change ONLY the reminder of the current state to it's opposite value; otherwise, do nothing and continue to show the task as always(no change). (why not null instad of returning the task?)
+    setTasks(
+      tasks.map(task =>
+        task.id === id ? { ...task, reminder: !task.reminder } : task
+      )
+    );
   };
 
   // Delete Task
