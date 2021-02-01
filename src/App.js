@@ -25,6 +25,17 @@ const App = () => {
     }
   ]);
 
+  // Add Task
+  const addTask = task => {
+    console.log("add task sanity check");
+    console.log(task);
+  };
+
+  // Delete Task
+  const deleteTask = id => {
+    setTasks(tasks.filter(task => task.id !== id));
+  };
+
   // Toggle Task Reminder: Allow user the ability to double click to create/set a reminder and put a border around it that identifies it as a "reminder"
   const taskReminder = id => {
     // console.log(id);
@@ -35,15 +46,10 @@ const App = () => {
     );
   };
 
-  // Delete Task
-  const deleteTask = id => {
-    setTasks(tasks.filter(task => task.id !== id));
-  };
-
   return (
     <div className="container">
       <Header />
-      <AddTask />
+      <AddTask onAdd={addTask} />
       {/* What to show... */}
       {tasks.length > 0 ? (
         <Tasks tasks={tasks} onDelete={deleteTask} onToggle={taskReminder} />
