@@ -4,6 +4,7 @@ import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
 
 const App = () => {
+  const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -33,6 +34,7 @@ const App = () => {
     // newTask is the id created above along with the task, day and reminder from the information currently entered on the form.
     const newTask = { id, ...task };
     setTasks([...tasks, newTask]);
+    // setShowAddTask(false)
   };
 
   // Delete Task
@@ -52,8 +54,12 @@ const App = () => {
 
   return (
     <div className="container">
-      <Header />
-      <AddTask onAdd={addTask} />
+      <Header
+        onAdd={() => setShowAddTask(prevValue => !prevValue)}
+        showAdd={showAddTask}
+      />
+      {/* What to show... */}
+      {showAddTask && <AddTask onAdd={addTask} />}
       {/* What to show... */}
       {tasks.length > 0 ? (
         <Tasks tasks={tasks} onDelete={deleteTask} onToggle={taskReminder} />
