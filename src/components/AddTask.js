@@ -9,7 +9,7 @@ const AddTask = ({ onAdd }) => {
     e.preventDefault();
     // first check for a task
     if (!text) {
-      alert("Enter a Task");
+      alert("Please enter a task");
       return;
     }
     // next add the task info

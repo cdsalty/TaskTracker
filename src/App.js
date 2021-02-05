@@ -27,8 +27,12 @@ const App = () => {
 
   // Add Task
   const addTask = task => {
-    console.log("add task sanity check");
-    console.log(task);
+    // console.log(task);
+    const id = Math.floor(Math.random() * 10000) + 1;
+    // console.log(id);
+    // newTask is the id created above along with the task, day and reminder from the information currently entered on the form.
+    const newTask = { id, ...task };
+    setTasks([...tasks, newTask]);
   };
 
   // Delete Task
