@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
@@ -7,19 +7,42 @@ const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
 
+  useEffect(() => {
+    const getTasks = async () => {
+      const tasksFromServer = await fetchTasks();
+      setTasks(tasksFromServer);
+    };
+    getTasks();
+  }, []);
+
+  // Fetch Tasks
+  const fetchTasks = async () => {
+    const res = await fetch("http://localhost:5000/tasks");
+    const data = await res.json();
+    return data;
+  };
   // Add Task
-  const addTask = task => {
-    // console.log(task);
-    const id = Math.floor(Math.random() * 10000) + 1;
-    // console.log(id);
-    // newTask is the id created above along with the task, day and reminder from the information currently entered on the form.
-    const newTask = { id, ...task };
-    setTasks([...tasks, newTask]);
-    // setShowAddTask(false)
+  const addTask = async task => {
+    const res = await fetch("http://localhost:5000/tasks", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(task)
+    });
+    // the data returned is the new task info. Add the new task to the rest of the tasks
+    const data = await res.json();
+    setTasks([...tasks, data]);
+    setShowAddTask(false);
   };
 
   // Delete Task
-  const deleteTask = id => {
+  const deleteTask = async id => {
+    // we need to fetch the delete method in order to delete from the backend
+    await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: "DELETE"
+    });
+    // the function below removes from the front end only
     setTasks(tasks.filter(task => task.id !== id));
   };
 
@@ -53,6 +76,16 @@ const App = () => {
 export default App;
 
 /*
+Add Task
+const addTask = task => {
+    // ID to identify/assign to each set of tasks
+    const id = Math.floor(Math.random() * 10000) + 1;
+    const newTask = { id, ...task };
+    setTasks([...tasks, newTask]);
+    // setShowAddTask(false)
+  };
+
+
 // Delete Task
   const deleteTask = id => {
     // What should be shown when a task is deleted?
